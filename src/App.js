@@ -2,23 +2,27 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const terms = [
+  ['apple', 'pie', 'time'],
+  ['puppy', 'tree'],
+  ['dude', 'land', 'fire'],
+];
+
 function App() {
+  const [hash, setHash] = React.useState();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      { hash ?
+        <>
+          <h2>{hash.map((part, index) => terms[index][part % terms.length]).join(' ')}</h2>
+        </>
+      :
+        <>
+      <h1>80s Exploitation Film Title Generator</h1>
+          <button onClick={() => setHash(terms.map(set => Math.floor(Math.random() * set.length)))}>Generate</button>
+        </>
+      }
     </div>
   );
 }
